@@ -4,36 +4,37 @@ const fitCSVDataToForm = (data) => {
   for (let el of data) {
     // change data to fit form
     let newObj = {
-      "name": `${el["Buyer first name"]} ${el["Buyer last name"]}`,
-      "address1": el["Shipping address 1"],
-      "address2": el["Shipping address 2"],
-      "city": el["Shipping city"],
-      "state": el["Shipping state"],
-      "zip": el["Shipping zip"],
-      "country": el["Shipping country"],
+      name: `${el["Buyer first name"]} ${el["Buyer last name"]}`,
+      address1: el["Shipping address 1"],
+      address2: el["Shipping address 2"],
+      city: el["Shipping city"],
+      state: el["Shipping state"],
+      zip: el["Shipping zip"],
+      country: el["Shipping country"],
     };
     newData.push(newObj);
   }
   return newData;
-}
+};
 
 const postData = async (request) => {
-  let response = await fetch('/print/', {
-    method: 'POST',
+  let response = await fetch("/print/", {
+    method: "POST",
+    redirect: "follow",
     headers: {
-      'Content-Type': 'application/json'
+      "Content-Type": "application/json",
     },
-    body: JSON.stringify(request)
+    body: JSON.stringify(request),
   });
+  alert(await response.json());
   return response.json();
 };
 
 const handleData = (data) => {
   let request = fitCSVDataToForm(data);
   //console.log(request);
-  postData(request);
+  return postData(request);
 };
-
 window.addEventListener("load", () => {
   // Access the uploader and form elements...
   const uploader = document.getElementById("uploader");
@@ -54,9 +55,9 @@ window.addEventListener("load", () => {
 
     Papa.parse(file, {
       header: true,
-      complete: (results) => {
-        handleData(results.data);
-      }
+      complete: async (results) => {
+        alert(await handleData(results.data));
+      },
     });
   });
 
@@ -73,17 +74,18 @@ window.addEventListener("load", () => {
     let country = document.getElementById("country").value;
 
     // create array of length 1 with the data
-    let data = [{
-      name,
-      address1,
-      address2,
-      city,
-      state,
-      zip,
-      country
-    }];
+    let data = [
+      {
+        name,
+        address1,
+        address2,
+        city,
+        state,
+        zip,
+        country,
+      },
+    ];
 
     handleData(data);
   });
-
 });

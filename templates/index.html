@@ -1,55 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Print Labels</title>
+    <!-- import papaparse -->
+    <script
+      type="text/javascript"
+      src="{{url_for('static', filename='papaparse.min.js')}}"
+    ></script>
+    <script
+      type="text/javascript"
+      src="{{url_for('static', filename='data.js')}}"
+    ></script>
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Print Labels</title>
-  <!-- import papaparse -->
-  <script type="text/javascript" src="{{url_for('static', filename='papaparse.min.js')}}"></script>
-  <script type="text/javascript" src="{{url_for('static', filename='data.js')}}"></script>
-</head>
+  <body>
+    <form action="/print/" method="post" id="form">
+      <label for="name">
+        Name <input type="text" name="name" id="name" />
+      </label>
+      <label for="address1">
+        Address 1 <input type="text" name="address1" id="address1" />
+      </label>
+      <label for="address2">
+        Address 2 <input type="text" name="address2" id="address2" />
+      </label>
+      <label for="city">
+        City <input type="text" name="city" id="city" />
+      </label>
+      <label for="state">
+        State <input type="text" name="state" id="state" />
+      </label>
+      <label for="zip"> Zip <input type="text" name="zip" id="zip" /> </label>
+      <label for="country">
+        Country <input type="text" name="country" id="country" />
+      </label>
+      <input type="submit" value="Submit" />
+    </form>
 
-<body>
-  <form action="/print/" method="post" id="form">
-    <label for="name">
-      Name <input type="text" name="name" id="name">
-    </label>
-    <label for="address1">
-      Address 1 <input type="text" name="address1" id="address1">
-    </label>
-    <label for="address2">
-      Address 2 <input type="text" name="address2" id="address2">
-    </label>
-    <label for="city">
-      City <input type="text" name="city" id="city">
-    </label>
-    <label for="state">
-      State <input type="text" name="state" id="state">
-    </label>
-    <label for="zip">
-      Zip <input type="text" name="zip" id="zip">
-    </label>
-    <label for="country">
-      Country <input type="text" name="country" id="country">
-    </label>
-    <input type="submit" value="Submit">
-  </form>
+    <p>OR upload .csv file</p>
 
-  <p>OR upload .csv</p>
+    <form id="uploader" method="POST">
+      <input type="file" name="file" id="file" />
+      <input type="submit" value="Upload" name="submit" />
+    </form>
+  </body>
 
-  <form id="uploader" method="POST">
-    <input type="file" name="file" id="file">
-    <input type="submit" value="Upload" name="submit">
-  </form>
-</body>
-
-<style>
-  label {
-    display: block;
-    width: 5em;
-  }
-</style>
-
+  <style>
+    label {
+      display: block;
+      width: 5em;
+    }
+  </style>
 </html>

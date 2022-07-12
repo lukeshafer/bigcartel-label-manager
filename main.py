@@ -16,10 +16,10 @@ def print_labels():
         #abort(400)
 
     if request.method == 'POST':
-        print(request)
+        print(request.data)
         #print(printLetter(request.form))
-        return "hello world"
-        #return send_from_directory(directory='./', filename='sample.pdf',mimetype='application/pdf')
+        # return "hello world"
+        return send_from_directory(directory='./', path='sample.pdf',mimetype='application/pdf')
 
 
 if __name__ == '__main__':
