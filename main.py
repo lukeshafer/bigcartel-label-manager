@@ -6,21 +6,22 @@ app = Flask(__name__)
 
 @app.route('/', methods=['GET'])
 def hello():
-    #return "hi"
+    # return "hi"
     return render_template('index.html')
 
 
 @app.route('/print/', methods=['POST'])
 def print_labels():
-    #if not request.form or not 'name' in request.form:
-        #abort(400)
+    # if not request.form or not 'name' in request.form:
+    # abort(400)
 
     if request.method == 'POST':
         print(request.data)
-        #print(printLetter(request.form))
+        # print(printLetter(request.form))
         # return "hello world"
-        return send_from_directory(directory='./', path='sample.pdf',mimetype='application/pdf')
+        return send_from_directory(directory='./', filename='sample.pdf', mimetype='application/pdf'), 201
+        # return send_from_directory(directory='./', path='sample.pdf', mimetype='application/pdf')
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0',debug=True)
+    app.run(host='0.0.0.0', debug=True)
