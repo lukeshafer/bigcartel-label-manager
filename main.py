@@ -10,16 +10,17 @@ def hello():
     return render_template('index.html')
 
 
-@app.route('/print/', methods=['POST'])
+@app.route('/print/', methods=['POST', 'GET'])
 def print_labels():
-    # if not request.form or not 'name' in request.form:
-    # abort(400)
+    # if not request.data:
+    #     abort(400)
 
     if request.method == 'POST':
-        print(request.data)
-        # print(printLetter(request.form))
-        # return "hello world"
-        return send_from_directory(directory='./', filename='sample.pdf', mimetype='application/pdf'), 201
+        data = request.get_json()
+        printLetter(data["addresses"])
+        return "Success", 200
+    if request.method == 'GET':
+        return send_from_directory(directory='./', filename='sample.pdf', mimetype='application/pdf')
         # return send_from_directory(directory='./', path='sample.pdf', mimetype='application/pdf')
 
 

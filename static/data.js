@@ -24,9 +24,11 @@ const postData = async (request) => {
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(request),
+    body: JSON.stringify({ addresses: request }),
   });
-  alert(await response.json());
+  if (response.ok) {
+    window.location.href = "/print/";
+  }
   return response.json();
 };
 
